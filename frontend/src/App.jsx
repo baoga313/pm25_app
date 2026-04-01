@@ -47,12 +47,46 @@ function App() {
       {/* Only show if pm25 is not null */}
       {pm25 && (
         <div className="result-card">
-          <p className="pm25-value">{pm25}</p>
-          <p className="pm25-label">PM2.5: {pm25} µg/m³</p>
+          <p className="pm25-label">{pm25} µg/m³</p>
+          <p className={getLevelClass(pm25)}>
+            Air Quality Level: {getLevel(pm25)}
+          </p>
         </div>
       )}
     </div>
   );
+
+  function getLevel(value) {
+    if (value < 0) {
+      return "Unknown value";
+    } else if (value <= 12) {
+      return "Good";
+    } else if (value <= 35.4) {
+      return "Moderate";
+    } else if (value <= 55.4) {
+      return "Unhealthy for Sensitive Groups";
+    } else if (value <= 150.4) {
+      return "Unhealthy";
+    } else {
+      return "Very Unhealthy";
+    }
+  }
+
+  function getLevelClass(value) {
+    if (value < 0) {
+      return "level-unknown";
+    } else if (value <= 12) {
+      return "level-good";
+    } else if (value <= 35.4) {
+      return "level-moderate";
+    } else if (value <= 55.4) {
+      return "level-unhealthy-sensitive";
+    } else if (value <= 150.4) {
+      return "level-unhealthy";
+    } else {
+      return "level-very-unhealthy";
+    }
+  }
 }
 
 export default App;
