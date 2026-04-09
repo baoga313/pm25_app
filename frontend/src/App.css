@@ -57,14 +57,40 @@ body {
   padding: 1.5rem;
 }
 
-.pm25-value {
-  font-size: 2.5rem;
+.pm25-label {
+  font-size: 2rem;
   font-weight: 700;
   color: #58a6ff;
+  padding-bottom: 20px;
 }
 
-.pm25-label {
+.level-unknown {
   color: #8b949e;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.level-good {
+  color: #2ea043;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.level-moderate {
+  color: #f0c000;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.level-unhealthy-sensitive {
+  color: #f85149;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.level-unhealthy {
+  color: #d11c24;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.level-very-unhealthy {
+  color: #ff000d;
   font-size: 0.9rem;
   margin-top: 0.3rem;
 }
@@ -98,4 +124,37 @@ body {
   width: 80px;
   height: 80px;
   max-width: 100px;
+}
+
+/* Email */
+
+.subscribe-card {
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+}
+
+.user-input {
+  margin: 5px;
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.subscribe-btn {
+  margin: 5px;
+  padding: 8px;
+  background-color: #58a6ff;
+  color: #0d1117;
+  border: none;
+  border-radius: 8px;
+  font-size: medium;
+  font-weight: 200;
+}
+
+.get-email {
+  margin-bottom: 20px;
+  font-size: 25px;
 }
