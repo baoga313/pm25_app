@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
-from services.air_quality import get_current_pm25
+from services.air_quality import get_history_pm25
 from services.db import add_subscriber
 
 app = Flask(__name__)
@@ -17,11 +17,12 @@ def pm25():
     if lat is None or lon is None:
         return jsonify({"error": "Please provide your location"}), 400
 
-    value = get_current_pm25(lat, lon)
+    value = get_history_pm25(lat, lon)
+    current = value[-1]
     return jsonify({
         "lat": lat,
         "lon": lon,
-        "pm2_5": value
+        "pm2_5": current
     })
 
 @app.route('/api/subscribe', methods = ["POST"])
