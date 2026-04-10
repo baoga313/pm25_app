@@ -16,19 +16,15 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      console.log("Step 1 - Got location:", lat, lon);
       fetch(`http://127.0.0.1:5000/api/pm25?lat=${lat}&lon=${lon}`)
         .then((response) => {
-          console.log("Step 2 - Got response:", response.status);
           return response.json();
         })
         .then((data) => {
-          console.log("Step 3 - Got data:", data);
           setPm25(data.pm2_5);
           setLoading(false);
         });
       (err) => {
-        console.log("Location error:", err);
         setError("Location access denied");
         setLoading(false);
       };
