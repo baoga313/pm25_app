@@ -1,3 +1,5 @@
 /.env
 /venv
-test_api.pyf
+test_api.py
+__pycache__/
+*.pyc
