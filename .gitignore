@@ -1,5 +1,6 @@
 /.env
 /venv
+/venv39
 test_api.py
 __pycache__/
 *.pyc

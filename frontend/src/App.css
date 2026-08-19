@@ -5,156 +5,839 @@
 }
 
 body {
-  background-color: #0d1117;
-  color: #e6edf3;
-  font-family: "Segoe UI", sans-serif;
-  min-height: 100vh;
+  font-family: "Geist", sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: relative;
+  width: 100%;
+  height: 1851px;
+  min-height: 900px;
+
+  background: #f8fafc;
+}
+
+.navbar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  width: 100%;
+  height: 72px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 209px;
+  height: 41px;
+}
+
+.brand-mark {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.container {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 16px;
-  padding: 2.5rem;
-  width: 100%;
-  height: auto;
-  max-width: 1000px;
-  max-height: 1000px;
-  text-align: center;
-  align-items: center;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.btn {
-  background-color: #58a6ff;
-  color: #0d1117;
-  border: none;
-  border-radius: 8px;
-  padding: 0.85rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  transition: opacity 0.2s;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.result-card {
-  margin-top: 1.5rem;
-  background-color: #0d1117;
-  border: 1px solid #30363d;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(45deg, #0ea5e9 25%, #10b981 75%);
   border-radius: 12px;
-  padding: 1.5rem;
 }
 
-.pm25-label {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #58a6ff;
-  padding-bottom: 20px;
-}
-
-.level-unknown {
-  color: #8b949e;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-.level-good {
-  color: #2ea043;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-.level-moderate {
-  color: #f0c000;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-.level-unhealthy-sensitive {
-  color: #f85149;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-.level-unhealthy {
-  color: #d11c24;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-.level-very-unhealthy {
-  color: #ff000d;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-
-.loading {
-  margin-top: 1.5rem;
-  color: #8b949e;
-}
-
-.error {
-  margin-top: 1.5rem;
-  color: #f85149;
-}
-#root {
-  min-height: 100vh;
+.brand-text {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 2px;
+
+  width: 161px;
+  height: 41px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.brand-name {
+  width: 161px;
+  height: 23px;
+
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  color: #0f172a;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.brand-sub {
+  width: 129px;
+  height: 16px;
+
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height */
+
+  color: #94a3b8;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+
+.nav-link {
+  font-family: "Geist";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 18px;
+  color: #475569;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.nav-actions {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.header {
+.btn-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 8px;
+  height: 40px;
+  background: #10b981;
+  box-shadow: 0px 10px 24px -8px rgba(16, 185, 129, 0.2);
+  border-radius: 999px;
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 80px 120px;
+  gap: 60px;
+  width: 100%;
+  background: #ffffff;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 540px;
+}
+
+.hero-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  color: #0f172a;
+}
+
+.hero-subtitle {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #475569;
+}
+
+.eyebrow {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 8px;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  border-radius: 999px;
+}
+
+.eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.eyebrow-text {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  color: #10b981;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 18px;
+  gap: 10px;
+  height: 35px;
+  background: #10b981;
+  box-shadow: 0px 12px 28px -10px rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+.cta-secondary {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 18px;
+  gap: 10px;
+  height: 35px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: "Geist", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  color: #475569;
+}
+
+.gauge-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 16px;
+  width: 436px;
+  height: 412px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0px 18px 48px -16px rgba(15, 23, 42, 0.0705882),
+    0px 2px 8px -2px rgba(15, 23, 42, 0.0509804);
+  border-radius: 24px;
+  margin-left: 150px;
+}
+
+.gauge-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 100%;
+}
+
+.gauge-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+}
+
+.gauge-label {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.gauge-value {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 35px;
+  color: #0f172a;
+}
+
+.quality-pill {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #94a3b8;
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pill-text {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+}
+
+/* Level variants */
+.quality-pill.level-good {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.quality-pill.level-moderate {
+  background: #fefce8;
+  border-color: #eab308;
+  color: #eab308;
+}
+
+.quality-pill.level-unhealthy-sensitive {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #f97316;
+}
+
+.quality-pill.level-unhealthy {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.quality-pill.level-very-unhealthy {
+  background: #faf5ff;
+  border-color: #a855f7;
+  color: #a855f7;
+}
+
+.quality-pill.level-unknown {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #94a3b8;
+}
+
+.gauge-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 260px;
+}
+
+.gauge-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 180px;
+  height: 180px;
+  background: #ffffff;
+  box-shadow: 0px 10px 28px -10px rgba(15, 23, 42, 0.05);
+  border-radius: 90px;
+  border: 12px solid #e2e8f0;
+}
+.gauge-center-label {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.gauge-center-value {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 100%;
+  color: #0f172a;
+}
+.gauge-center-unit {
+  font-family: "Geist", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #475569;
+}
+.gauge-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.gauge-range {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  color: #94a3b8;
+}
+
+.gauge-ratio {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 17px;
+  color: #0f172a;
+}
+
+.gauge-center.level-good {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.gauge-center.level-moderate {
+  background: #fefce8;
+  border-color: #eab308;
+  color: #eab308;
+}
+
+.gauge-center.level-unhealthy-sensitive {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #f97316;
+}
+
+.gauge-center.level-unhealthy {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.gauge-center.level-very-unhealthy {
+  background: #faf5ff;
+  border-color: #a855f7;
+  color: #a855f7;
+}
+
+.gauge-center.level-unknown {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #94a3b8;
+}
+
+/* explain section */
+.explaination-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 96px 120px;
+  gap: 24px;
+  width: 100%;
+  background: #ffffff;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+
+.section-eyebrow {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.section-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 40px;
+  color: #0f172a;
+}
+
+.section-desc {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  color: #475569;
+}
+
+.explanation-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.explanation-icon {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.explanation-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.explanation-heading {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  color: #0f172a;
+}
+
+.explanation-body {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: #475569;
+}
+
+.facts {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.fact-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 10px;
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.fact-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.fact-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+
+.fact-icon-green {
+  background: #ecfdf5;
+}
+
+.fact-icon-blue {
+  background: #e0f2fe;
+}
+
+.fact-icon-white {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.fact-title {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: #0f172a;
+}
+
+.fact-body {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  color: #475569;
+}
+
+.subscription-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 96px 120px;
+  gap: 24px;
+  width: 100%;
+  background: #f8fafc;
+}
+.signup-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+  gap: 16px;
+  width: 100%;
+  max-width: 920px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0px 20px 50px -18px rgba(15, 23, 42, 0.07),
+    0px 2px 8px -2px rgba(15, 23, 42, 0.05);
+  border-radius: 24px;
+}
+
+.signup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.signup-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #0f172a;
+}
+
+.signup-desc {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  color: #475569;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.email-input {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 12px;
+  width: 100%;
+  height: 52px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+.email-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #0f172a;
+}
+
+.email-input input::placeholder {
+  color: #94a3b8;
+}
+
+.threshold-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.threshold-label {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 16px;
+  flex: 1;
+  height: 52px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+.threshold-text {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #475569;
+}
+
+.threshold-value {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: #0f172a;
+}
+
+.subscribe-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 0px 18px;
   gap: 10px;
-  margin-bottom: 1rem;
-}
-
-.logo {
-  width: 80px;
-  height: 80px;
-  max-width: 100px;
-}
-
-/* Email */
-
-.subscribe-card {
-  margin-top: 1.5rem;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-}
-
-.user-input {
-  margin: 5px;
-  padding: 10px;
-  width: 250px;
-  border-radius: 5px;
-}
-
-.subscribe-btn {
-  margin: 5px;
-  padding: 8px;
-  background-color: #58a6ff;
-  color: #0d1117;
+  height: 52px;
+  background: #10b981;
+  box-shadow: 0px 12px 26px -10px rgba(16, 185, 129, 0.2);
+  border-radius: 14px;
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
-  font-size: medium;
-  font-weight: 200;
+  cursor: pointer;
 }
 
-.get-email {
-  margin-bottom: 20px;
-  font-size: 25px;
+.threshold-input-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.threshold-input {
+  width: 60px;
+  background: #ffffff;
+  color-scheme: light;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px 8px;
+  outline: none;
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #0f172a;
+  text-align: right;
+}
+
+.threshold-input:focus {
+  border-color: #10b981;
+}
+
+.threshold-unit {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.signup-note {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: #94a3b8;
+}
+
+.sub-message {
+  font-family: "Geist", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #10b981;
 }
