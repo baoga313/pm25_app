@@ -36,7 +36,7 @@ function App() {
         })
         .then((data) => {
           setPm25(data.pm2_5);
-          setLocation(`${lat.toFixed(2)}, ${lon.toFixed(2)}`);
+          setLocation(data.city);
           setLastUpdated(new Date().toLocaleTimeString());
           setLoading(false);
         });
@@ -178,7 +178,7 @@ function App() {
           <div className="hero-meta">
             <div className="meta-item">
               <MapPin size={16} color="#94a3b8" />
-              <span>Default Location: {location}</span>
+              <span>Location: {location}</span>
             </div>
             <div className="meta-item">
               <Clock size={16} color="#94a3b8" />
