@@ -20,6 +20,7 @@ function App() {
   const [location, setLocation] = useState("Unknown");
   const [lastUpdated, setLastUpdated] = useState(null);
   const [threshold, setThreshold] = useState(35);
+  const [prediction, setPrediction] = useState(null);
   console.log("Rendering... pm25 =", pm25);
 
   // Call api to check the current pm 2.5 based on user's location
@@ -39,6 +40,11 @@ function App() {
           setLocation(data.city);
           setLastUpdated(new Date().toLocaleTimeString());
           setLoading(false);
+        });
+      fetch(`http://127.0.0.1:5000/api/predict?lat=${lat}&lon=${lon}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setPrediction(data.predicted_pm25);
         });
       (err) => {
         setError("Location access denied");
@@ -221,6 +227,19 @@ function App() {
               {pm25 ? `${Math.round(pm25)} / ${getRange(pm25).max}` : "-- / 12"}
             </span>
           </div>
+          {prediction != null && (
+            <div className="gauge-prediction">
+              <span className="prediction-label">Next hour forecast: </span>
+              <span className="prediction-value">{prediction} µg/m³</span>
+              {prediction !== null && (
+                <p className="prediction-note">
+                  Forecast model trained on industrial sensor data from
+                  Ploiești, Romania. Predictions for other regions are estimates
+                  and may be biased.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </section>
       {/* explain what is pm2.5 and how it it affect user's health */}
