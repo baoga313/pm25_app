@@ -28,6 +28,25 @@ def pm25():
         "city": city
     })
 
+@app.route('/api/predict')
+def predict():
+    lat = request.args.get("lat", type=float)  
+    lon = request.args.get("lon", type=float)
+
+    if lat is None or lon is None:
+        return jsonify({"error": "Please provide your location"}), 400
+
+    try:
+        prediction  = predict_pm25(lat, lon)
+        return jsonify({
+            "lat": lat,
+            "lon": lon,
+            "predicted_pm25": prediction
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)},500)
+
+
 @app.route('/api/subscribe', methods = ["POST"])
 def subscribe():
     data = request.get_json()

@@ -841,3 +841,37 @@ body {
   font-size: 14px;
   color: #10b981;
 }
+
+.gauge-prediction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.prediction-label {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 17px;
+  color: #94a3b8;
+}
+
+.prediction-value {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.prediction-note {
+  font-family: "Geist", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 150%;
+  color: #94a3b8;
+  width: 100%;
+}
