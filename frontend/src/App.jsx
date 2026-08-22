@@ -9,6 +9,7 @@ import {
   Shield,
   Mail,
   ArrowRight,
+  RefreshCw,
 } from "lucide-react";
 
 function App() {
@@ -28,29 +29,31 @@ function App() {
     setLoading(true);
     setError(null);
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      fetch(`http://127.0.0.1:5000/api/pm25?lat=${lat}&lon=${lon}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          setPm25(data.pm2_5);
-          setLocation(data.city);
-          setLastUpdated(new Date().toLocaleTimeString());
-          setLoading(false);
-        });
-      fetch(`http://127.0.0.1:5000/api/predict?lat=${lat}&lon=${lon}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPrediction(data.predicted_pm25);
-        });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetch(`http://127.0.0.1:5000/api/pm25?lat=${lat}&lon=${lon}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            setPm25(data.pm2_5);
+            setLocation(data.city);
+            setLastUpdated(new Date().toLocaleTimeString());
+            setLoading(false);
+          });
+        fetch(`http://127.0.0.1:5000/api/predict?lat=${lat}&lon=${lon}`)
+          .then((response) => response.json())
+          .then((data) => {
+            setPrediction(data.predicted_pm25);
+          });
+      },
       (err) => {
         setError("Location access denied");
         setLoading(false);
-      };
-    });
+      },
+    );
   }
   //check the level of air quality based on pm 2.5
   function getLevel(value) {
@@ -98,7 +101,12 @@ function App() {
         fetch("http://127.0.0.1:5000/api/subscribe", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email, lat: lat, lon: lon }),
+          body: JSON.stringify({
+            email: email,
+            lat: lat,
+            lon: lon,
+            threshold: threshold,
+          }),
         })
           .then((response) => response.json())
           .then((data) => setSubMessage(data.message));
@@ -171,9 +179,13 @@ function App() {
             alerts when air quality affect your heath.
           </p>
           <div className="hero-ctas">
-            <button className="cta-primary" onClick={checkAirQuality}>
-              <Bell size={18} color="#ffffff" />
-              Set up spike alerts
+            <button
+              className="cta-primary"
+              onClick={checkAirQuality}
+              disabled={loading}
+            >
+              <RefreshCw size={18} color="#ffffff" />
+              {loading ? "Checking..." : "Check air quality"}
             </button>
             <button className="cta-secondary">
               {" "}
@@ -216,7 +228,7 @@ function App() {
             <div className={`gauge-center ${pm25 ? getLevelClass(pm25) : ""}`}>
               <span className="gauge-center-label">PM2.5</span>
               <span className="gauge-center-value">
-                {pm25 ? Math.round(pm25) : "--"}
+                {loading ? "..." : pm25 ? Math.round(pm25) : "--"}
               </span>
               <span className="gauge-center-unit">µg/m³</span>
             </div>
@@ -228,22 +240,22 @@ function App() {
             </span>
           </div>
           {prediction != null && (
-            <div className="gauge-prediction">
-              <span className="prediction-label">Next hour forecast: </span>
-              <span className="prediction-value">{prediction} µg/m³</span>
-              {prediction !== null && (
-                <p className="prediction-note">
-                  Forecast model trained on industrial sensor data from
-                  Ploiești, Romania. Predictions for other regions are estimates
-                  and may be biased.
-                </p>
-              )}
-            </div>
+            <>
+              <div className="gauge-prediction">
+                <span className="prediction-label">Next hour forecast: </span>
+                <span className="prediction-value">{prediction} µg/m³</span>
+              </div>
+              <p className="prediction-note">
+                Forecast model trained on industrial sensor data from Ploiești,
+                Romania. Predictions for other regions are estimates and may be
+                biased.
+              </p>
+            </>
           )}
         </div>
       </section>
       {/* explain what is pm2.5 and how it it affect user's health */}
-      <section className="explaination-section">
+      <section className="explanation-section">
         <div className="section-header">
           <span className="section-eyebrow">What it means</span>
           <h2 className="section-title">Understanding PM2.5</h2>
@@ -346,7 +358,7 @@ function App() {
                     type="number"
                     className="threshold-input"
                     value={threshold}
-                    onChange={(e) => setThreshold(e.target.value)}
+                    onChange={(e) => setThreshold(Number(e.target.value))}
                   />
                   <span className="threshold-unit">µg/m³</span>
                 </div>
