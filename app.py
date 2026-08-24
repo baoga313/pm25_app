@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS
+from flask_cors import CORS # type: ignore
 from services.air_quality import get_history_pm25
 from services.db import add_subscriber
 from services.geocode import get_city_name
@@ -44,7 +44,7 @@ def predict():
             "predicted_pm25": prediction
         })
     except Exception as e:
-        return jsonify({"error": str(e)},500)
+        return jsonify({"error": str(e)}),500
 
 
 @app.route('/api/subscribe', methods = ["POST"])
@@ -53,12 +53,26 @@ def subscribe():
     email = data.get('email')
     lat = data.get('lat')
     lon = data.get('lon')
+    threshold = data.get('threshold')
 
+    if threshold is None:
+        threshold = 35.0
+    try:
+        threshold = float(threshold)
+    except(TypeError, ValueError):
+        return jsonify({"message": "Invalid threshold"}), 400
+    # check if any of user input is valid
+    if threshold <= 0 or threshold > 500:
+        return jsonify({"message": "Threshold must be between 0 and 500"}), 400
+
+    if lat is None or lon is None:
+        return jsonify({"message": "Location is required"}), 400
+    
     if email is not None:
         # check if the user input is an email format
         if "@" not in email or "." not in email.split("@")[-1]:
             return jsonify({"message": "Invalid email format"}), 400
-        add_subscriber(email, lat, lon)
+        add_subscriber(email, lat, lon, threshold)
         return jsonify({"message": "Subscribed successfully!"})
     else:
         return jsonify({"message": "Email is required"}), 400
