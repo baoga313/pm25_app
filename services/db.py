@@ -12,9 +12,9 @@ def get_connection():
         database = os.getenv("MYSQL_DATABASE"),
     )
 
-def add_subscriber(email, lat, lon):
+def add_subscriber(email, lat, lon, threshold):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT IGNORE INTO subscribers (email, lat, lon) VALUES (%s, %s, %s)", (email,lat, lon))
+    cursor.execute("INSERT INTO subscribers (email, lat, lon, threshold) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE lat=%s, lon=%s, threshold=%s", (email,lat, lon, threshold, lat, lon, threshold ))
     conn.commit()
     conn.close()
