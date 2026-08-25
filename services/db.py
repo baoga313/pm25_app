@@ -18,3 +18,22 @@ def add_subscriber(email, lat, lon, threshold):
     cursor.execute("INSERT INTO subscribers (email, lat, lon, threshold) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE lat=%s, lon=%s, threshold=%s", (email,lat, lon, threshold, lat, lon, threshold ))
     conn.commit()
     conn.close()
+
+def get_subscribers():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT email, lat, lon, threshold, last_alerted FROM subscribers")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def mark_alerted(email):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE subscribers SET last_alerted = NOW() WHERE email = %s",
+        (email,)
+    )
+    conn.commit()
+    conn.close()
