@@ -5,9 +5,9 @@ from services.db import add_subscriber
 from services.geocode import get_city_name
 from services.predictor import predict_pm25
 from services.scheduler import start_scheduler
+import re
 
-
-
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$")
 app = Flask(__name__)
 CORS(app)
 @app.route('/')
@@ -73,7 +73,7 @@ def subscribe():
     
     if email is not None:
         # check if the user input is an email format
-        if "@" not in email or "." not in email.split("@")[-1]:
+        if not EMAIL_RE.match(email):
             return jsonify({"message": "Invalid email format"}), 400
         add_subscriber(email, lat, lon, threshold)
         return jsonify({"message": "Subscribed successfully!"})
