@@ -4,6 +4,9 @@ from services.air_quality import get_history_pm25
 from services.db import add_subscriber
 from services.geocode import get_city_name
 from services.predictor import predict_pm25
+from services.scheduler import start_scheduler
+
+
 
 app = Flask(__name__)
 CORS(app)
@@ -79,4 +82,5 @@ def subscribe():
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    start_scheduler()
+    app.run(debug=True, use_reloader = False)
