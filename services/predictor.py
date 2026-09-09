@@ -1,7 +1,6 @@
 import numpy as np
 import pickle
 import requests
-import tensorflow as tf
 
 LOOKBACK = 24
 MODEL_PATH = "model/lstm_hourly_pm25_model_70%.h5"
@@ -9,7 +8,13 @@ FEATURE_SCALER_PATH = "model/feature_scaler.pkl"
 TARGET_SCALER_PATH = "model/target_scaler.pkl"
 
 # load model
-model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+try:
+    import tensorflow as tf
+    model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    MODEL_AVAILABLE = True
+except Exception as e:
+    print(f"[predictor] TensorFlow unavailable: {e}")
+    MODEL_AVAILABLE = False
 
 with open (FEATURE_SCALER_PATH, "rb") as f:
     feature_scaler = pickle.load(f)
