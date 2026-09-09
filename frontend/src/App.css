@@ -35,6 +35,10 @@ body {
   height: 72px;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
+  /* pin the navbar when scroll */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .brand {
@@ -126,6 +130,7 @@ body {
   color: #ffffff;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .hero {
@@ -237,6 +242,7 @@ body {
   color: #0f172a;
   cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .hero-meta {
@@ -878,4 +884,9 @@ body {
   .facts {
     flex-direction: column;
   }
+}
+/* avoid jump into the page when click the navbar or any navigate button */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }

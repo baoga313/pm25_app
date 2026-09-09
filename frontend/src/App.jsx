@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import {
   Wind,
@@ -22,7 +22,26 @@ function App() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [threshold, setThreshold] = useState(35);
   const [prediction, setPrediction] = useState(null);
+  const [activeSection, setActivateSection] = useState("top");
   console.log("Rendering... pm25 =", pm25);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActivateSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-40% 0px -55% 0px",
+      },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   // Call api to check the current pm 2.5 based on user's location
   function checkAirQuality() {
@@ -141,29 +160,35 @@ function App() {
           </div>
         </div>
         <div className="nav-links">
-          <a className="nav-link active" href="#">
+          <a
+            className={`nav-link ${activeSection === "top" ? "active" : ""}`}
+            href="#top"
+          >
             Dashboard
           </a>
-          <a className="nav-link" href="#">
+          <a
+            className={`nav-link ${activeSection === "guide" ? "active" : ""}`}
+            href="#guide"
+          >
             PM2.5 Guide
           </a>
-          <a className="nav-link" href="#">
+          <a
+            className={`nav-link ${activeSection === "alerts" ? "active" : ""}`}
+            href="#alerts"
+          >
             Alerts
-          </a>
-          <a className="nav-link" href="#">
-            About
           </a>
         </div>
         <div className="nav-actions">
-          <button className="btn-signup">
+          <a className="btn-signup" href="#alerts">
             {" "}
             <Bell size={18} color="#ffffff" />
             Get alerts
-          </button>
+          </a>
         </div>
       </nav>
       {/* show current pm2.5 */}
-      <section className="hero">
+      <section className="hero" id="top">
         <div className="hero-content">
           <div className="eyebrow">
             <span className="eyebrow-dot"></span>
@@ -187,11 +212,11 @@ function App() {
               <RefreshCw size={18} color="#ffffff" />
               {loading ? "Checking..." : "Check air quality"}
             </button>
-            <button className="cta-secondary">
+            <a className="cta-secondary" href="#guide">
               {" "}
               <Info size={18} color="#0f172a" />
               Learn about PM2.5
-            </button>
+            </a>
           </div>
           <div className="hero-meta">
             <div className="meta-item">
@@ -255,7 +280,7 @@ function App() {
         </div>
       </section>
       {/* explain what is pm2.5 and how it it affect user's health */}
-      <section className="explanation-section">
+      <section className="explanation-section" id="guide">
         <div className="section-header">
           <span className="section-eyebrow">What it means</span>
           <h2 className="section-title">Understanding PM2.5</h2>
@@ -321,7 +346,7 @@ function App() {
         </div>
       </section>
       {/* get the user's email and ask for the threshold */}
-      <section className="subscription-section">
+      <section className="subscription-section" id="alerts">
         <div className="section-header">
           <span className="section-eyebrow"> Stay informed</span>
           <h2 className="section-title">Get notified when PM2.5 spikes</h2>
