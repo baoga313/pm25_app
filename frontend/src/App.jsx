@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 function App() {
+  const API_BASE = "http://127.0.0.1:5000";
   const [pm25, setPm25] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -52,7 +53,7 @@ function App() {
       (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        fetch(`http://127.0.0.1:5000/api/pm25?lat=${lat}&lon=${lon}`)
+        fetch(`${API_BASE}/api/pm25?lat=${lat}&lon=${lon}`)
           .then((response) => {
             return response.json();
           })
@@ -62,7 +63,7 @@ function App() {
             setLastUpdated(new Date().toLocaleTimeString());
             setLoading(false);
           });
-        fetch(`http://127.0.0.1:5000/api/predict?lat=${lat}&lon=${lon}`)
+        fetch(`${API_BASE}/api/predict?lat=${lat}&lon=${lon}`)
           .then((response) => response.json())
           .then((data) => {
             setPrediction(data.predicted_pm25);
@@ -117,7 +118,7 @@ function App() {
       (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        fetch("http://127.0.0.1:5000/api/subscribe", {
+        fetch(`${API_BASE}/api/subscribe`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
