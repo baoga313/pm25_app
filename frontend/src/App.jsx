@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 function App() {
-  const API_BASE = "http://127.0.0.1:5000";
+  const API_BASE = "https://pm2-5-air-quality.onrender.com";
   const [pm25, setPm25] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
