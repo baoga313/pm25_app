@@ -33,6 +33,7 @@ optree==0.19.1
 packaging==26.2
 pillow==11.3.0
 protobuf==6.33.6
+psycopg2-binary==2.9.12
 Pygments==2.20.0
 python-dotenv==1.2.1
 requests==2.32.5

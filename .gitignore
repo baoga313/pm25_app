@@ -1,5 +1,6 @@
 /.env
 /venv39
 test_api.py
+frontend/node_modules
 __pycache__/
 *.pyc

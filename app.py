@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
 from flask_cors import CORS # type: ignore
 from services.air_quality import get_history_pm25
 from services.db import add_subscriber
@@ -6,13 +6,17 @@ from services.geocode import get_city_name
 from services.predictor import predict_pm25
 from services.scheduler import start_scheduler
 import re
+import os
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$")
-app = Flask(__name__)
+app = Flask(__name__, static_folder="frontend/dist", static_url_path="")
 CORS(app)
-@app.route('/')
-def home():
-    return 'Hello, World!'
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/pm25')
 def pm25():
@@ -83,4 +87,5 @@ def subscribe():
 
 if __name__ == '__main__':
     start_scheduler()
-    app.run(debug=True, use_reloader = False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
