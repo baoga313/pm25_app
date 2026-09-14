@@ -5,6 +5,7 @@ from services.db import add_subscriber
 from services.geocode import get_city_name
 from services.predictor import predict_pm25
 from services.scheduler import start_scheduler
+from services.email_service import send_welcome
 import re
 import os
 
@@ -79,7 +80,9 @@ def subscribe():
         # check if the user input is an email format
         if not EMAIL_RE.match(email):
             return jsonify({"message": "Invalid email format"}), 400
+        city = get_city_name(lat,lon)
         add_subscriber(email, lat, lon, threshold)
+        send_welcome(email, threshold, city)
         return jsonify({"message": "Subscribed successfully!"})
     else:
         return jsonify({"message": "Email is required"}), 400
