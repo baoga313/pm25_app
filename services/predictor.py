@@ -1,3 +1,4 @@
+print("PREDICTOR MODULE LOADING...")
 import numpy as np
 import pickle
 import requests
@@ -8,9 +9,12 @@ FEATURE_SCALER_PATH = "model/feature_scaler.pkl"
 TARGET_SCALER_PATH = "model/target_scaler.pkl"
 
 # load model
+print("ABOUT TO LOAD TENSORFLOW...")
 try:
     import tensorflow as tf
+    print("TENSORFLOW IMPORTED, LOADING MODEL...")
     model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    print("MODEL LOADED SUCCESSFULLY")
     MODEL_AVAILABLE = True
 except Exception as e:
     print(f"[predictor] TensorFlow unavailable: {e}")
