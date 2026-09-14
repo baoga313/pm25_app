@@ -89,6 +89,9 @@ def subscribe():
     
 
 if __name__ == '__main__':
+    print("STARTING SCHEDULER...")
     start_scheduler()
+    print("SCHEDULER STARTED, LAUNCHING FLASK...")
     port = int(os.environ.get("PORT", 5000))
+    print(f"BINDING TO PORT {port}...")
     app.run(host="0.0.0.0", port=port)
