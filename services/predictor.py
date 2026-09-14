@@ -39,7 +39,9 @@ def fetch_last_24h(lat, lon):
 
 
     aq_resp = requests.get(aq_url).json()
+    print("AQ RESPONSE:", aq_resp)
     weather_resp = requests.get(weather_url).json()
+    print("WEATHER RESPONSE:", weather_resp)
 
     pm10 = aq_resp["hourly"]["pm10"]
     temperature = weather_resp["hourly"]["temperature_2m"]
