@@ -62,6 +62,8 @@ def fetch_last_24h(lat, lon):
 
 
 def predict_pm25 (lat, lon):
+    if not MODEL_AVAILABLE:
+        raise RuntimeError("Prediction model is not available on this server")
     rows = fetch_last_24h(lat, lon)
     X = np.array(rows, dtype=np.float32)
     X_scaled = feature_scaler.transform(X) #(24 rows,4 features)
