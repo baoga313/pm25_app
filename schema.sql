@@ -1,0 +1,9 @@
+CREATE TABLE subscribers (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    lat DOUBLE PRECISION,
+    lon DOUBLE PRECISION,
+    threshold NUMERIC(5,1) DEFAULT 35.0,
+    last_alerted TIMESTAMP DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
